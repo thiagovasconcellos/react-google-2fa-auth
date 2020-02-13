@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import speakeasy from 'speakeasy';
-import qrcode from 'qrcode';
 import { ToastContainer, toast } from 'react-toastify';
 import GlobalStyle from './styles/global';
 import { Container } from './styles';
+import { validateToken, generateQrCode } from './utils/G2Fa';
 
 
 function App() {
@@ -18,40 +17,28 @@ function App() {
     }
     loadData();
   }, []);
-  function generateQrCode() {
-    const auth = speakeasy.generateSecret({
-      name: 'CBYK-Test',
-    });
-
-    qrcode.toDataURL(auth.otpauth_url, (err, data) => {
-      if (err) throw err;
-      setImg(data);
-      localStorage.setItem('imgData', data);
-    });
-    setSecret(auth.ascii);
-    localStorage.setItem('secret', auth.ascii);
+  function getQrCode() {
+    try {
+      const response = generateQrCode();
+      setImg(response.imgPath);
+      setSecret(response.secret);
+      localStorage.setItem('imgData', response.imgPath);
+      localStorage.setItem('secret', response.secret);
+    } catch (error) {
+      toast.error(error);
+    }
   }
 
-  function validateToken() {
+  function getValidation() {
     if (!token) {
       toast.error('É necessário digitar o token');
       return;
     }
     if (!secret) {
       toast.error('O código validador não foi gerado. Gere o código de barras');
-      return;
     }
-    const verify = speakeasy.totp.verify({
-      secret,
-      encoding: 'ascii',
-      token,
-    });
 
-    if (verify) {
-      toast.info('Token válido');
-    } else {
-      toast.error('Token inválido');
-    }
+    validateToken(secret, token) ? toast.info('Token válido') : toast.error('Token inválido');
   }
   return (
     <>
@@ -59,9 +46,9 @@ function App() {
       <ToastContainer autoClose={3000} />
       <Container>
         <img src={img} alt="" />
-        <button disabled={!!img} onClick={() => generateQrCode()} type="button">Gerar código de barras</button>
+        <button disabled={!!img} onClick={() => getQrCode()} type="button">Gerar código de barras</button>
         <input onInput={(e) => setToken(e.target.value)} placeholder="Digite o código de validação" />
-        <button onClick={() => validateToken()} type="button">Verificar</button>
+        <button onClick={() => getValidation()} type="button">Verificar</button>
       </Container>
     </>
   );
