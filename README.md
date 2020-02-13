@@ -13,4 +13,4 @@ This project was just a test to see how Google 2Fa works.
 
 ## Authors
 
-* **Thiago Vasconcellos** - *Express-Blank-API* - [thiagovasconcellos](https://github.com/thiagovasconcellos)
+* **Thiago Vasconcellos** - *Google 2Fa-Auth* - [thiagovasconcellos](https://github.com/thiagovasconcellos)
