@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import GlobalStyle from './styles/global';
-import { Container } from './styles';
+import { Container, ButtonGenerate, ButtonValidate } from './styles';
 import { validateToken, generateQrCode } from './utils/G2Fa';
 
 
@@ -46,9 +46,9 @@ function App() {
       <ToastContainer autoClose={3000} />
       <Container>
         <img src={img} alt="" />
-        <button disabled={!!img} onClick={() => getQrCode()} type="button">Gerar código de barras</button>
+        <ButtonGenerate disabled={!!img} onClick={() => getQrCode()} type="button">Gerar código de barras</ButtonGenerate>
         <input onInput={(e) => setToken(e.target.value)} placeholder="Digite o código de validação" />
-        <button onClick={() => getValidation()} type="button">Verificar</button>
+        <ButtonValidate onClick={() => getValidation()} type="button">Verificar</ButtonValidate>
       </Container>
     </>
   );

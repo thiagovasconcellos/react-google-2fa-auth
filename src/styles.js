@@ -16,21 +16,36 @@ export const Container = styled.div`
     max-width: 256px;
     max-height: 256px;
   }
-  button {
-      border: 1px;
-      border-radius: 5px;
-      background: #efefef;
-      width: 250px;
-      
-
-      &:hover{        
-        background: royalblue;
-        color: #efefef;
-      }
-    }    
 
   input{
     width: 250px;
     border-radius: 5px;
     }
+`;
+
+export const ButtonGenerate = styled.button`
+  border: 1px;
+  border-radius: 5px;
+  background: #efefef;
+  width: 250px;
+
+
+  &:hover{        
+    background: ${(props) => (props.disabled ? 'red' : 'royalblue')};
+    color: #efefef;
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};    
+  }    
+`;
+
+export const ButtonValidate = styled.button`
+  border: 1px;
+  border-radius: 5px;
+  background: #efefef;
+  width: 250px;
+
+
+  &:hover{        
+    background: royalblue; 
+    color: #efefef;
+  }    
 `;
