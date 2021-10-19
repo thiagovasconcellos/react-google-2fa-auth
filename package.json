@@ -4,20 +4,23 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/jest-dom": "^5.1.0",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.1",
+    "react-scripts": "4.0.0",
     "react-toastify": "^5.5.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "@snyk/protect": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,5 +49,6 @@
     "prettier": "^1.19.1",
     "qrcode": "^1.4.4",
     "speakeasy": "^2.0.0"
-  }
+  },
+  "snyk": true
 }
